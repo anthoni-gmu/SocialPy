@@ -6,19 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <title></title>
 </head>
-<body>
-    {% block navbar %}{% endblock navbar %}
-    
-    {% block left_sidebar %}{% endblock left_sidebar %}
+<body class="bg-gray-100 dark:bg-dark-main flex justify-center">
+    {% block navbar %}
+    {% endblock navbar %}
+    <div class="flex justify-center h-screen">
+         <div class="w-1/5 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0">
+            {% block left_sidebar %}{% endblock left_sidebar %}
+        </div>
+        <div class="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
+            {% block content %}{% endblock content %}
+        </div>
+        <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
+            {% block right_sidebar %}{% endblock right_sidebar %}
+        </div>
 
-    {% block content %}{% endblock content %}
+            {% block footer %}{% endblock footer %}
+    </div>
 
-    {% block right_sidebar %}{% endblock right_sidebar %}
-
-    {% block footer %}{% endblock footer %}
+  
 
     {% block javascript %}{% endblock javascript %}
 </body>
