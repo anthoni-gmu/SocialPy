@@ -10,6 +10,19 @@
             <img src="{% static 'img/logo.png' %}" alt="" class="w-10 h-10 ">
         </a>
         <div class="flex items-center justify-between space-x-1">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'account_login' %}"
+                class="inline-flex md:hidden items-center justify-center p-1 rounded-full hover:bg-gray-200  dark:hover:bg-dark-third mx-1">
+
+                <span class="mx-2 font-semibold dark:text-dark-txt">Login</span>
+            </a>
+            <a href="{% url 'account_signup' %}"
+                class="inline-flex md:hidden items-center justify-center p-1 rounded-full hover:text-white hover:bg-blue-500 bg-blue-400 dark:hover:bg-dark-third mx-1">
+
+                <span class="mx-2 font-semibold dark:text-dark-txt">Register</span>
+            </a>
+            
+{% else %}
             <a href="#"
                 class=" md:hidden inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-third mx-1">
                 <i class='bx bx-coin text-yellow-300'></i>
@@ -26,14 +39,12 @@
                 <input type="text" placeholder="Search Facebook"
                     class="outline-none border-none bg-transparent hidden xl:inline-block">
             </div>
-            <div>
                 <div class="text-xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt"
                     id="dark-mode-toggle-mb">
                     <i class='bx bxs-bell'></i>
                 </div>
                
-            </div>
-
+{% endif %}
         </div>
     </div>
    
@@ -142,7 +153,20 @@
 
     <!-- RIGHT NAV -->
     <ul class="hidden md:flex mx-4 items-center justify-center">
-        <li class="h-full  xl:flex">
+    {% if not user.is_authenticated %}
+            <a href="{% url 'account_login' %}"
+                class="inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200  dark:hover:bg-dark-third mx-1">
+
+                <span class="mx-2 font-semibold dark:text-dark-txt">Login</span>
+            </a>
+            <a href="{% url 'account_signup' %}"
+                class="inline-flex items-center justify-center p-1 rounded-full hover:text-white hover:bg-blue-500 bg-blue-400 dark:hover:bg-dark-third mx-1">
+
+                <span class="mx-2 font-semibold dark:text-dark-txt">Register</span>
+            </a>
+            
+{% else %}
+<li class="h-full  xl:flex">
             <a href="#"
                 class="inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-third mx-1">
                 <i class='bx bx-coin text-yellow-300'></i>
@@ -154,7 +178,6 @@
                 <span class="mx-2 font-semibold dark:text-dark-txt">0.00</span>
             </a>
         </li>
-
         <li >
          <div x-data="{ open: false } "> 
             <div @click="open =true"
@@ -185,7 +208,7 @@
                 </div
         </li>
         
-
+ {% endif %} 
     </ul>
     <!-- END RIGHT NAV -->
 

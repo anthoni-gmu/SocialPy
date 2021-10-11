@@ -49,7 +49,7 @@
           */
          // '../../**/*.py'
      ],
-     darkMode:'media', // or 'media' or 'class'
+     darkMode: 'media', // or 'media' or 'class'
      theme: {
          extend: {
              'dark-main': '#18191A',
