@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'theme',
     'core',
     'social',
+    'accounts',
     'django.contrib.sites',
     'django.contrib.humanize',
     'allauth',
@@ -64,7 +65,7 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_UNIQUE = True
-# AUTH_USER_MODEL="accounts.User"
+AUTH_USER_MODEL="accounts.User"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
