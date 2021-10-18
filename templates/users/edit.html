@@ -19,12 +19,10 @@
 {% csrf_token %}
 <div class="mt-1 sm:mt-0 sm:col-span-2">
       <img class="h-28 w-full bg-cover" src="{{user.profile.banner.url}}" alt="{{profile.user.username}} Banner Picture">
-
       <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 dark:border-dark-third border-gray-300 border-dashed rounded-md">
         {{form.banner}}
         <div class="space-y-1 text-center">
           <div class="flex text-sm text-gray-600">
-            
           </div>
         </div>
       </div>

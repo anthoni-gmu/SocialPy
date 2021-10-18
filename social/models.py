@@ -15,14 +15,14 @@ class SocialPost(models.Model):
     create_on = models.DateTimeField(default=timezone.now)
     author=models.ForeignKey(User,on_delete=models.CASCADE,related_name='social_post_author')
     likes=models.ManyToManyField(User,blank=True,related_name='likes')
-    dislike=models.ManyToManyField(User,blank=True,related_name='dislike')
+    dislikes=models.ManyToManyField(User,blank=True,related_name='dislikes')
     
 class SocialComment(models.Model):
     commet=models.TextField() 
     create_on = models.DateTimeField(default=timezone.now)
     author=models.ForeignKey(User,on_delete=models.CASCADE,related_name='social_comment_author')
     likes=models.ManyToManyField(User,blank=True,related_name='comment_likes')
-    dislike=models.ManyToManyField(User,blank=True,related_name='comment_dislike')
+    dislike=models.ManyToManyField(User,blank=True,related_name='comment_dislikes')
     
 class Image(models.Model):
     image=models.ImageField(upload_to=user_directory_path,blank=True,null=True)

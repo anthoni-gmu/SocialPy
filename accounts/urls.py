@@ -5,5 +5,5 @@ app_name="accounts"
 
 urlpatterns =[
     path('<username>/',UserProfileView.as_view(),name='profile'),
-    path('profile/edit', EditProfile, name="edit-profile")
+    path('profile/edit', EditProfile, name="edit-profile"),
 ]

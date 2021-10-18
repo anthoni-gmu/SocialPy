@@ -42,3 +42,5 @@ class HomeView(LoginRequiredMixin,View):
         }
         return render(request, 'pages/index.html', context)
     
+    
+    

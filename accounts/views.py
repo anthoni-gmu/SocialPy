@@ -4,23 +4,60 @@ from accounts.forms import EditProfileForm
 from accounts.models import Profile
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
+from social.forms import SocialPostForm
+from social.models import Image, SocialPost, SocialComment
 User=get_user_model()
 
 class UserProfileView(View):
     def get(self, request, *args,username, **kwargs):
         user=get_object_or_404(User,username=username)
         profile=Profile.objects.get(user=user)
+        logged_in_user = request.user
+        posts=SocialPost.objects.all()
+        
+        form=SocialPostForm()
         context={
             'user':user,
-            'profile':profile
+            'profile':profile,
+            'posts':posts,
+            'form':form   
             
         }
         return render(request, 'users/detail.html', context)
+    
+    def post(self, request, *args, **kwargs):
+        logged_in_user = request.user
+        posts=SocialPost.objects.all()
+        
+        form=SocialPostForm(request.POST,request.FILES)
+        files=request.FILES.getlist('image')
+        
+        if form.is_valid():
+            new_post=form.save(commit=False) 
+            new_post.author=logged_in_user
+            new_post.save() 
+            
+            for f in files:
+                img=Image(image=f) 
+                img.save()  
+                new_post.image.add(img)
+            
+        context={
+            'form':form  ,
+            'posts':posts         
+        }
+        return render(request, 'users/detail.html', context)
+
+
+
+
+
 
 @login_required
 def EditProfile(request):
     user =request.user.id 
-    profile=Profile.objects.get(user_id=user)
+    profile=Profile.objects.get(user__id=user)
     user_basic_info=User.objects.get(id=user)
     if request.method == 'POST':
         form=EditProfileForm(request.POST,request.FILES,instance=profile)
