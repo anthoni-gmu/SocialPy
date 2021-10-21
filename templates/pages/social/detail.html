@@ -255,18 +255,18 @@
 
 
         <!-- LIST COMMENT -->
-        {% comment %} <div class="py-2 px-4 max-w-full">
+         <div class="py-2 px-4 max-w-full">
             <!-- COMMENT -->
             {% for comment in comments %}
             {% if comment.is_parent %}
             <div class="flex space-x-2">
-                <a href="{% url 'profile' comment.author.username %}">
-                <img src="{{comment.author.profile.picture.url}}" alt="Profile picture" class="w-9 h-9 rounded-full">
+                <a href="{% url 'users:profile' comment.author.username %}">
+                <img src="{{comment.author.profile.pinture.url}}" alt="Profile picture" class="w-9 h-9 rounded-full">
                 </a>
                 <div>
                     <div class="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
                         
-                        <a href="{% url 'profile' username=post.author.username %}" class="font-semibold block hover:text-blue-500 dark:text-dark-txt"><p>{{comment.author}}</p></a>
+                        <a href="{% url 'users:profile' username=post.author.username %}" class="font-semibold block hover:text-blue-500 dark:text-dark-txt"><p>{{comment.author}}</p></a>
                         
                         <span class="dark:text-dark-txt">{{comment.comment}}</span>
                         <span class="text-xs dark:text-dark-txt text-gray-500 float-right">{{comment.created_on | naturaltime}}</span>
@@ -359,12 +359,12 @@
                     <!-- REPLY COMMENT -->
                     {% for child_comment in comment.children %}
                     <div class="flex space-x-2">
-                        <a href="{% url 'profile' comment.author.username %}">
-                        <img src="{{child_comment.author.profile.picture.url}}" alt="Profile picture" class="w-9 h-9 rounded-full">
+                        <a href="{% url 'users:profile' comment.author.username %}">
+                        <img src="{{child_comment.author.profile.pinture.url}}" alt="Profile picture" class="w-9 h-9 rounded-full">
                         </a>
                         <div>
                             <div class="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
-                                <a href="{% url 'profile' username=post.author.username %}" class="font-semibold block hover:text-blue-500 dark:text-dark-txt"><p>{{child_comment.author}}</p></a>
+                                <a href="{% url 'users:profile' username=post.author.username %}" class="font-semibold block hover:text-blue-500 dark:text-dark-txt"><p>{{child_comment.author}}</p></a>
                                 <span class="dark:text-dark-txt">{{child_comment.comment}}</span>
                             <span class="text-xs dark:text-dark-txt text-gray-500 float-right">{{child_comment.created_on | naturaltime}}</span>
                             </div>
@@ -407,7 +407,7 @@
             
             <!-- END COMMENT -->
 
-        </div> {% endcomment %}
+        </div> 
         <!-- END LIST COMMENT -->
    
 
