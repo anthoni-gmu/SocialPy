@@ -37,6 +37,7 @@ class Profile(models.Model):
     banner =models.ImageField(default='users/user_default_bg.jpg',upload_to=user_directory_path_banner)
     verifield=models.CharField(max_length=10,choices=VERIFICATION_OPTIONS,default='unverified')#verified
     coins  =models.DecimalField(max_digits=19,decimal_places=2,default=0,blank=False)  
+    followers=models.ManyToManyField(User, blank=True,related_name='followers')
     date_created =models.DateField(auto_now_add=True)
     #user info
     location=models.CharField(max_length=50,null=True,blank=True)   
