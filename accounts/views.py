@@ -20,7 +20,7 @@ class UserProfileView(View):
         user=get_object_or_404(User,username=username)
         profile=Profile.objects.get(user=user)
         logged_in_user = request.user
-        posts=SocialPost.objects.all()
+        posts=SocialPost.objects.filter(author__profile__in=[logged_in_user.id]).order_by('-create_on')
         
         followers = profile.followers.all()
         
@@ -48,7 +48,9 @@ class UserProfileView(View):
     
     def post(self, request, *args, **kwargs):
         logged_in_user = request.user
-        posts=SocialPost.objects.all()
+        posts=SocialPost.objects.filter(author__profile__in=[logged_in_user.id]).order_by('-create_on')
+
+
         
         form=SocialPostForm(request.POST,request.FILES)
         files=request.FILES.getlist('image')

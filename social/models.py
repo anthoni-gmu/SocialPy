@@ -10,6 +10,9 @@ def dm_directory_path(instance,filename):
     return 'users/messages/{0}'.format(filename)
 
 class SocialPost(models.Model):
+    shared_body=models.TextField(blank=True,null=True)
+    shared_user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True,related_name='+')
+    shared_on=models.DateTimeField(default=timezone.now)
     body=models.TextField()
     image=models.ManyToManyField('Image',blank=True)
     create_on = models.DateTimeField(default=timezone.now)

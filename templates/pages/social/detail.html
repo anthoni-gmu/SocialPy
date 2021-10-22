@@ -160,7 +160,7 @@
             <div class="border border-gray-200 dark:border-dark-third border-l-0 border-r-0 py-1">
                 <div class="flex space-x-2">
                     
-                    <form method="POST" action="{% url 'social:like' post.pk %}" class="mt-2 px-2">
+                    <form method="POST" action="{% url 'social:like'  post.pk %}" class="mt-2 px-2">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{request.path}}">
                         <button type="submit" class=" flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
