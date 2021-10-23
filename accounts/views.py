@@ -5,7 +5,7 @@ from accounts.models import Profile
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
-from social.forms import SocialPostForm
+from social.forms import SocialPostForm,ShareForm
 from social.models import Image, SocialPost, SocialComment
 from django.contrib import messages
 from django.template import loader
@@ -20,9 +20,10 @@ class UserProfileView(View):
         user=get_object_or_404(User,username=username)
         profile=Profile.objects.get(user=user)
         logged_in_user = request.user
-        posts=SocialPost.objects.filter(author__profile__in=[logged_in_user.id]).order_by('-create_on')
+        posts=SocialPost.objects.filter(author__profile__in=[profile.id]).order_by('-create_on')
         
         followers = profile.followers.all()
+        share_form = ShareForm()
         
         form=SocialPostForm()
         
