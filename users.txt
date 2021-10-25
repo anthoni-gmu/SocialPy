@@ -1,0 +1,12 @@
+bot{
+    correo: bot@social.con
+    pass:bot12345
+}
+lucas{
+    correo: lucas@social.con
+    pass:lucas12345}
+}
+maria{
+    correo: maria@social.con
+    pass:maria12345
+}

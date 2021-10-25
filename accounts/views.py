@@ -24,7 +24,7 @@ class UserProfileView(View):
         
         followers = profile.followers.all()
         share_form = ShareForm()
-        
+        number_of_posts=len(posts)
         form=SocialPostForm()
         
         if len(followers)==0:
@@ -44,6 +44,8 @@ class UserProfileView(View):
             'form':form,
             'number_of_followers':number_of_followers,
             'is_following':is_following,
+            'number_of_posts':number_of_posts,
+            'followers':followers
         }
         return HttpResponse(template.render(context, request))
     
@@ -70,7 +72,10 @@ class UserProfileView(View):
             'form':form  ,
             'posts':posts         
         }
-        return render(request, 'users/detail.html', context)
+        template=loader.get_template('users/detail.html')
+        
+        return HttpResponse(template.render(context, request))
+
 
 
 
