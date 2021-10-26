@@ -49,32 +49,36 @@ class UserProfileView(View):
         }
         return HttpResponse(template.render(context, request))
     
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args,username, **kwargs):
+        user =request.user.id 
+        profile=Profile.objects.get(user__id=user)
         logged_in_user = request.user
-        posts=SocialPost.objects.filter(author__profile__in=[logged_in_user.id]).order_by('-create_on')
+        posts = SocialPost.objects.filter(
+            author__profile__followers__in=[logged_in_user.id]
+        ).order_by('-create_on')
 
+        form = SocialPostForm(request.POST, request.FILES)
+        files = request.FILES.getlist('image')
 
-        
-        form=SocialPostForm(request.POST,request.FILES)
-        files=request.FILES.getlist('image')
-        
+        share_form = ShareForm()
+
         if form.is_valid():
-            new_post=form.save(commit=False) 
-            new_post.author=logged_in_user
-            new_post.save() 
-            
+            new_post = form.save(commit=False)
+            new_post.author = logged_in_user
+            new_post.save()
+
             for f in files:
-                img=Image(image=f) 
-                img.save()  
+                img = Image(image=f)
+                img.save()
                 new_post.image.add(img)
-            
-        context={
-            'form':form  ,
-            'posts':posts         
+
+        context = {
+            'form': form,
+            'posts': posts,
+            'share_form': share_form
         }
-        template=loader.get_template('users/detail.html')
+        return redirect('users:profile', username=request.user.username)
         
-        return HttpResponse(template.render(context, request))
 
 
 

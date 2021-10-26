@@ -7,6 +7,12 @@ lucas{
     pass:lucas12345}
 }
 maria{
-    correo: maria@social.con
+    correo: maria@social.com
     pass:maria12345
+}
+
+http://127.0.0.1:8000/accounts/confirm-email/NA:1mf4xA:L0OTuiJ_isJv_Q69N2xhj2Z3SgoS0EREMDe4BdCOLp4/
+
+works{
+    profile perfil picture
 }
