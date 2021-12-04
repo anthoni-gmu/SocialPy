@@ -8,10 +8,9 @@ environ.Env.read_env()
 ENVIRONMENT =env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY =os.environ.get('SECRET_KEY')
-DEBUG='RENDER' not in os.environ
 
+DEBUG='RENDER' not in os.environ
 ALLOWED_HOSTS = [
     '*'
 ]
@@ -104,7 +103,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

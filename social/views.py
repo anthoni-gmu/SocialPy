@@ -26,7 +26,6 @@ class PostDetailView(LoginRequiredMixin,View):
         post=SocialPost.objects.get(pk=pk)
         form=SocialCommentForm(request.POST)
         comments=SocialComment.objects.filter(post=post).order_by('-create_on')
-        
         if form.is_valid():
             new_comment=form.save(commit=False)
             new_comment.author=request.user  
